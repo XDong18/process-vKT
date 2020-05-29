@@ -61,7 +61,7 @@ def gen_datapoint(rgb_fn, depth_fn, rgb_next_fn, depth_next_fn, flow_fn, n = 819
     rgb_next_np = cv2.imread(rgb_next_fn)[:, :, ::-1] / 255.
     depth_next_np = cv2.imread(depth_next_fn, cv2.IMREAD_ANYCOLOR | cv2.IMREAD_ANYDEPTH) / 100.
     ##### generate needed data
-    h, w = rgb_np.shape
+    h, w, _ = rgb_np.shape
 
     ##### point set 1 current pos
     try:
