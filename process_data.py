@@ -156,6 +156,11 @@ def proc_one_scene_vkt(scene_root, out_dir):
         depth_next_fn = glob.glob(os.path.join(depth_root, '*' + str(int_idx+1).zfill(5) + '*'))[0]
         #sceneflow_next_fn = glob.glob(os.path.join(sceneflow_root, '*' + str(int_idx+1).zfill(5) + '*'))[0]
         out_fn = os.path.join(out_dir, scene_name + '_' + type_name + '_' + str(int_idx+1).zfill(5) + '.npz')
+        rgb_fn = os.path.join(rgb_root, rgb_fn)
+        depth_fn = os.path.join(depth_next_fn, depth_fn)
+        sceneflow_fn = os.path.join(sceneflow_root, sceneflow_fn)
+        rgb_next_fn = os.path.join(rgb_root, rgb_next_fn)
+        depth_next_fn = os.path.join(depth_next_fn, depth_next_fn)
         d = gen_datapoint(rgb_fn, depth_fn, rgb_next_fn, depth_next_fn, sceneflow_fn)
         if d is not None:
             np.savez_compressed(out_fn, points1=d[0], \
