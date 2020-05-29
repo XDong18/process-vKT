@@ -47,7 +47,7 @@ def get_2d_pos_yx(x, y, depth, w, h, focal_length=725.0087):
     x_prime = x * focal_length / depth + w / 2.
     return [y_prime, x_prime]
 
-def gen_datapoint(rgb_fn, depth_fn, rgb_next_fn, depth_next_fn, flow_fn, n = 8192, max_cut = 35, focal_length=725.0087):
+def gen_datapoint(rgb_fn, depth_fn, rgb_next_fn, depth_next_fn, flow_fn, n = 8192, max_cut = 100, focal_length=725.0087):
     np.random.seed(0)
     ##### generate needed data
 
@@ -71,6 +71,7 @@ def gen_datapoint(rgb_fn, depth_fn, rgb_next_fn, depth_next_fn, flow_fn, n = 819
 
     satisfy_pix1 = np.column_stack(np.where(depth_requirement))
     if satisfy_pix1.shape[0] < n:
+        print('satisfy:', satisfy_pix1.shape[0])
         return None
     sample_choice1 = np.random.choice(satisfy_pix1.shape[0], size=n, replace=False)
     sampled_pix1_y = satisfy_pix1[sample_choice1, 0]
@@ -136,8 +137,10 @@ def gen_datapoint(rgb_fn, depth_fn, rgb_next_fn, depth_next_fn, flow_fn, n = 819
 
 def proc_one_scene_vkt(scene_root, out_dir):
     # scene_toor: .../Scene01/clone
+    
     scene_name = scene_root.split('/')[-1]
     type_name = scene_root.split('/')[-2]
+    print('process:', scene_name)
 
     frame_root = os.path.join(scene_root, 'frames')
     rgb_root = os.path.join(frame_root, 'rgb', 'Camera_0')
@@ -186,8 +189,8 @@ def main():
 
     for s in scene_list:
         print(s)
-        # proc_one_scene(s, INPUT_DIR, OUTPUT_DIR)
-        pool.apply_async(proc_one_scene_vkt, (os.path.join(INPUT_DIR, s), OUTPUT_DIR))
+        proc_one_scene_vkt(os.path.join(INPUT_DIR, s), OUTPUT_DIR)
+        # pool.apply_async(proc_one_scene_vkt, (os.path.join(INPUT_DIR, s), OUTPUT_DIR))
 
     pool.close()
     pool.join()
