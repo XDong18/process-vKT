@@ -140,7 +140,6 @@ def proc_one_scene_vkt(scene_root, out_dir):
     
     scene_name = scene_root.split('/')[-1]
     type_name = scene_root.split('/')[-2]
-    print('process:', scene_name)
 
     frame_root = os.path.join(scene_root, 'frames')
     rgb_root = os.path.join(frame_root, 'rgb', 'Camera_0')
@@ -189,7 +188,7 @@ def main():
 
     for s in scene_list:
         print(s)
-        proc_one_scene_vkt(os.path.join(INPUT_DIR, s), OUTPUT_DIR)
+        proc_one_scene_vkt(os.path.join(INPUT_DIR, s, 'clone'), OUTPUT_DIR)
         # pool.apply_async(proc_one_scene_vkt, (os.path.join(INPUT_DIR, s), OUTPUT_DIR))
 
     pool.close()
