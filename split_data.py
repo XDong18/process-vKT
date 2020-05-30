@@ -20,8 +20,9 @@ val_list = glob.glob(os.path.join(path, 'clone' + '*' + '.npz'))
 #     os.rename(rela_fn, new_rela_fn)
 
 for fn in val_list:
-    rela_fn = os.path.join(path, fn)
-    new_fn = 'VAL_' + fn
+    # rela_fn = os.path.join(path, fn)
+    s_fn = os,path.split(fn)[-1]
+    new_fn = 'VAL_' + s_fn
     new_rela_fn = os.path.join(path, new_fn)
-    os.rename(rela_fn, new_rela_fn)
+    os.rename(fn, new_rela_fn)
 
