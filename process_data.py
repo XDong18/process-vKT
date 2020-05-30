@@ -151,10 +151,20 @@ def proc_one_scene_vkt(scene_root, out_dir):
         # print(str_idx)
         int_idx = int(str_idx)
         # print(int_idx)
+        if len(glob.glob(os.path.join(depth_root, '*' + str_idx + '*'))) == 0:
+            continue
+
+        if len(glob.glob(os.path.join(sceneflow_root, '*' + str_idx + '*'))) == 0:
+            continue
+
         depth_fn = glob.glob(os.path.join(depth_root, '*' + str_idx + '*'))[0]
         sceneflow_fn = glob.glob(os.path.join(sceneflow_root, '*' + str_idx + '*'))[0]
         if len(glob.glob(os.path.join(rgb_root, '*' + str(int_idx+1).zfill(5) + '*')))==0:
             continue
+        
+        if len(glob.glob(os.path.join(depth_root, '*' + str(int_idx+1).zfill(5) + '*'))) == 0:
+            continue
+
         rgb_next_fn = glob.glob(os.path.join(rgb_root, '*' + str(int_idx+1).zfill(5) + '*'))[0]
         depth_next_fn = glob.glob(os.path.join(depth_root, '*' + str(int_idx+1).zfill(5) + '*'))[0]
         #sceneflow_next_fn = glob.glob(os.path.join(sceneflow_root, '*' + str(int_idx+1).zfill(5) + '*'))[0]
