@@ -196,8 +196,8 @@ def main():
 
     for s in scene_list:
         print(s)
-        proc_one_scene_vkt(os.path.join(INPUT_DIR, s, 'clone'), OUTPUT_DIR)
-        # pool.apply_async(proc_one_scene_vkt, (os.path.join(INPUT_DIR, s), OUTPUT_DIR))
+        # proc_one_scene_vkt(os.path.join(INPUT_DIR, s, 'clone'), OUTPUT_DIR)
+        pool.apply_async(proc_one_scene_vkt, (os.path.join(INPUT_DIR, s), OUTPUT_DIR))
 
     pool.close()
     pool.join()
