@@ -147,6 +147,7 @@ def proc_one_scene_vkt(scene_root, out_dir):
     sceneflow_root = os.path.join(frame_root, 'forwardSceneFlow', 'Camera_0')
     for rgb_fn in sorted(os.listdir(rgb_root)):
         str_idx = rgb_fn.split('.')[0][-5]
+        print(str_idx)
         int_idx = int(str_idx)
         print(int_idx)
         depth_fn = glob.glob(os.path.join(depth_root, '*' + str_idx + '*'))[0]
