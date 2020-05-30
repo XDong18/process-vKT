@@ -97,8 +97,10 @@ def gen_datapoint(rgb_fn, depth_fn, rgb_next_fn, depth_next_fn, flow_fn, n = 819
 
     # future_pos1 = np.array([get_3d_pos_xy( future_pix1_y[i], future_pix1_x[i], future_depth_np[int(sampled_pix1_y[i]), int(sampled_pix1_x[i])] ) for i in range(n)])
     ##### point set 1 future pos
-
-    flow = flow_np[:]
+    sampled_scene_flow_x = sampled_scene_flow_x.resahpe(-1,1)
+    sampled_scene_flow_y = sampled_scene_flow_y.resahpe(-1,1)
+    sampled_scene_flow_z = sampled_scene_flow_z.resahpe(-1,1)
+    flow = np.hstack([sampled_scene_flow_x, sampled_scene_flow_y, sampled_scene_flow_z])
     
 
     ##### point set 2 current pos
