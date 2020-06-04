@@ -3,7 +3,7 @@ import random
 import glob
 
 random.seed(0)
-path = './data_processed_vkt2'
+path = 'data_processed_vkt2_semantic'
 file_list = os.listdir(path)
 total_num = len(file_list)
 
